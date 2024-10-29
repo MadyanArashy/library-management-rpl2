@@ -363,7 +363,8 @@ export default function Welcome({
             </div> */}
             <div className='w-full mx-auto flex flex-col justify-center min-h-screen'>
         <img src='images/library.png' alt='logo' className='w-full max-w-screen-sm'/>
-        <h1 className='text-4xl font-bold'>Welcome to Mobile Legends</h1>
+        <h1 className='text-4xl font-bold'>Welcome to Library Pesat IT XPro</h1>
+
             </div>
         </>
 
