@@ -1,28 +1,27 @@
 "use client";
-
+import { cn } from "@/lib/utils";
+// import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconArrowLeft, IconBrandTabler, IconMenu2, IconSettings, IconUserBolt, IconX } from "@tabler/icons-react";
+import { IconMenu2, IconX } from "@tabler/icons-react";
 import { InertiaLinkProps, Link } from "@inertiajs/react";
-import { cn } from "@/lib/utils";  // Utility for combining class names
 
-// Define the interface for sidebar links
 interface Links {
   label: string;
   href: string;
   icon: React.JSX.Element | React.ReactNode;
 }
 
-// Define the Sidebar context
 interface SidebarContextProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   animate: boolean;
 }
 
-const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
+const SidebarContext = createContext<SidebarContextProps | undefined>(
+  undefined
+);
 
-// Hook for consuming the Sidebar context
 export const useSidebar = () => {
   const context = useContext(SidebarContext);
   if (!context) {
@@ -31,7 +30,6 @@ export const useSidebar = () => {
   return context;
 };
 
-// Sidebar Provider to manage the open/close state of the sidebar
 export const SidebarProvider = ({
   children,
   open: openProp,
@@ -49,13 +47,12 @@ export const SidebarProvider = ({
   const setOpen = setOpenProp !== undefined ? setOpenProp : setOpenState;
 
   return (
-    <SidebarContext.Provider value={{ open, setOpen, animate }}>
+    <SidebarContext.Provider value={{ open, setOpen, animate: animate }}>
       {children}
     </SidebarContext.Provider>
   );
 };
 
-// Main Sidebar Component
 export const Sidebar = ({
   children,
   open,
@@ -74,7 +71,6 @@ export const Sidebar = ({
   );
 };
 
-// Sidebar Body component, handling both desktop and mobile views
 export const SidebarBody = (props: React.ComponentProps<typeof motion.div>) => {
   return (
     <>
@@ -84,7 +80,6 @@ export const SidebarBody = (props: React.ComponentProps<typeof motion.div>) => {
   );
 };
 
-// Desktop Sidebar component
 export const DesktopSidebar = ({
   className,
   children,
@@ -95,7 +90,7 @@ export const DesktopSidebar = ({
     <>
       <motion.div
         className={cn(
-          "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[300px] flex-shrink-0",
+          "min-h-screen px-4 py-4 hidden  md:flex md:flex-col bg-white dark:bg-gray-900 w-[300px] flex-shrink-0",
           className
         )}
         animate={{
@@ -111,7 +106,6 @@ export const DesktopSidebar = ({
   );
 };
 
-// Mobile Sidebar component
 export const MobileSidebar = ({
   className,
   children,
@@ -122,7 +116,7 @@ export const MobileSidebar = ({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
+          "h-10 px-4 py-4 flex flex-row md:hidden  items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
         )}
         {...props}
       >
@@ -162,7 +156,6 @@ export const MobileSidebar = ({
   );
 };
 
-// Sidebar Link component
 export const SidebarLink = ({
   link,
   className,
@@ -177,7 +170,7 @@ export const SidebarLink = ({
     <Link
       href={link.href}
       className={cn(
-        "flex items-center justify-start gap-2 group/sidebar py-2",
+        "flex items-center justify-start gap-2  group/sidebar py-2",
         className
       )}
       {...props}
@@ -194,50 +187,5 @@ export const SidebarLink = ({
         {link.label}
       </motion.span>
     </Link>
-  );
-};
-
-// Example links to be used in the sidebar
-const links: Links[] = [
-  {
-    label: "Dashboard",
-    href: "#",
-    icon: (
-      <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    ),
-  },
-  {
-    label: "Profile",
-    href: "#",
-    icon: (
-      <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    ),
-  },
-  {
-    label: "Settings",
-    href: "#",
-    icon: (
-      <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    ),
-  },
-  {
-    label: "Logout",
-    href: "#",
-    icon: (
-      <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    ),
-  },
-];
-
-// Main sidebar layout
-export const SidebarLayout = () => {
-  return (
-    <Sidebar>
-      <SidebarBody>
-        {links.map((link, index) => (
-          <SidebarLink key={index} link={link} />
-        ))}
-      </SidebarBody>
-    </Sidebar>
   );
 };
