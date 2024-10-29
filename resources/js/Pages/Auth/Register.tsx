@@ -26,6 +26,10 @@ export default function Register() {
         <GuestLayout>
             <Head title="Register" />
 
+            <div>
+                <h1 className='font-bold text-2xl dark:text-gray-100'>Selamat Datang di Perpustakaan SMK Pesat IT XPro!</h1>
+            </div>
+
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />

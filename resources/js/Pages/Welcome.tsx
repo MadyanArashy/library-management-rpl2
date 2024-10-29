@@ -19,7 +19,7 @@ export default function Welcome({
 
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Home" />
             {/* <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
                 <img
                     id="background"
@@ -361,11 +361,14 @@ export default function Welcome({
                     </div>
                 </div>
             </div> */}
-            <div className='w-full mx-auto flex flex-col justify-center min-h-screen'>
-        <img src='images/library.png' alt='logo' className='w-full max-w-screen-sm'/>
+    <div className='w-full mx-auto flex flex-col justify-center min-h-screen text-center'>
+        <img src='images/library.png' alt='logo' className='w-full max-w-md mx-auto'/>
+            <div className='w-1/2 text-center mx-auto'>
         <h1 className='text-4xl font-bold'>Welcome to Library Pesat IT XPro</h1>
-
+        <p className=''>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis eligendi esse nostrum voluptates optio hic iste excepturi. Illo aliquid placeat culpa illum cumque? Sapiente qui quam, blanditiis illo quod, amet ducimus accusantium, dicta nemo culpa itaque. Laudantium vitae tenetur aspernatur veniam, alias odio ipsa sit dignissimos repellendus! Accusantium, eius perferendis.</p>
+        <Link href={route('login')} className='bg-lime-600 dark:bg-lime-300 rounded-md px-2.5 py-1.5 text-gray-600 hover:opacity-80'>Explore More</Link>
             </div>
+    </div>
         </>
 
     );

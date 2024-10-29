@@ -38,10 +38,12 @@ export default function Login({
                 </div>
             )}
 
+            <div>
+                <h1 className='font-bold text-2xl dark:text-gray-100'>Selamat Datang Kembali di<br/> SMK Pesat IT XPro!</h1>
+            </div>
+
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -51,14 +53,13 @@ export default function Login({
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
+                        placeholder='Masukkan email Anda'
                     />
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
                     <TextInput
                         id="password"
                         type="password"
@@ -72,7 +73,7 @@ export default function Login({
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="mt-4 block">
+                <div className="mt-4 flex justify-between">
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
@@ -81,25 +82,31 @@ export default function Login({
                                 setData('remember', e.target.checked)
                             }
                         />
-                        <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
-                            Remember me
+                        <span className="ms-2 text-sm text-gray-100">
+                            Ingat Saya
                         </span>
                     </label>
-                </div>
-
-                <div className="mt-4 flex items-center justify-end">
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
                             className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                         >
-                            Forgot your password?
+                            Lupa Password Anda?
                         </Link>
                     )}
+                </div>
+
+                <div className="mt-4 flex flex-col gap-2 items-center justify-end">
 
                     <PrimaryButton className="ms-4" disabled={processing}>
                         Log in
                     </PrimaryButton>
+                    <Link
+                    href={route('register')}
+                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                    >
+                        Belum Memiliki Akun?
+                    </Link>
                 </div>
             </form>
         </GuestLayout>
