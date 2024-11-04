@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import React, { useState } from "react";
 import {
   IconArrowLeft,
@@ -8,20 +8,54 @@ import {
   IconSettings,
   IconUserBolt,
 } from "@tabler/icons-react";
+import {
+    LibraryBig,
+    BookCheck,
+    BookDashed,
+    BookUp2,
+ } from 'lucide-react';
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Sidebar, SidebarBody, SidebarLink } from '@/Components/ui/sidebar';
+import { p } from 'framer-motion/client';
+
+// Define the type for the User object
+interface User {
+    name: string;
+    // Add any other properties you expect from the user object
+}
+
+// Props interface for DashboardContent
+interface DashboardContentProps {
+    user: User;
+}
 
 
 // Komponen utama Dashboard dengan layout dan sidebar
 export default function Dashboard() {
+
+    const [count, setCount] = useState(0);
+    const [text, setText] = useState("");
+    const user = usePage().props.auth.user;
+
   return (
     <AuthenticatedLayout>
-      <Head title="Dashboard" />
-      <nav>
-
-      </nav>
-      <DashboardContent/>
+    <Head title="Dashboard" />
+    {/* <div className='flex flex-row gap-4'>
+        <div>
+            <p className="font-semibold text-red-700">Ayo pukul aku, pukul aku</p>
+            <p>Terpukul {count} kali</p>
+            <button onClick={()=> setCount(count + 1)} className='bg-red-400 font-bold'>Pukul</button>
+            {count >= 10 && <p className='text-red-600'>Ampun bang</p>}
+        </div>
+        <div>
+            <p className="font-semibold text-blue-700">Ayo ketik aku, ketik aku</p>
+            <input type="text" value={text} onChange={(e)=> setText(e.target.value)}/> <br/>
+            {text}
+            {text.length >= 20 && <p className='text-blue-600'>Panjang amat bang ;)</p>}
+        </div>
+    </div> */}
+    <DashboardContent user={user}/>
     </AuthenticatedLayout>
   );
 }
@@ -32,12 +66,12 @@ export default function Dashboard() {
 
 
 // Konten dashboard
-const DashboardContent = () => (
+const DashboardContent: React.FC<DashboardContentProps> = ({ user }) => (
   <div className="lg:flex-col mx-autoinline-block justify-left px-8 py-6">
         <div className="px-12 py-8 lg:flex lg:lg:flex-1 gap-7 items-center rounded-xl bg-gray-50 dark:bg-gray-950 shadow-lg shadow-gray-300 dark:shadow-gray-900">
             <img src="images/library.png" alt="Logo" className='w-full max-w-sm'/>
             <div className="flex flex-col max-w-screen-lg">
-                <h1 className='text-3xl font-bold'>Selamat pagi, Admin!</h1>
+                <h1 className='text-3xl font-bold'>Selamat pagi, {user.name}</h1>
                 <h3 className='text-gray-800 dark:text-gray-200 mb-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis nam dolor praesentium dicta velit ipsum culpa cumque molestias illum odio, voluptas provident error quod debitis rem aut, ducimus vitae veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
                 <div className="flex gap-16 mt-3">
                     <Link href={route('profile.destroy')} className='px-4 py-2 bg-gray-200 dark:text-black rounded-md lg:rounded-full text-nowrap'>Baca Buku</Link>
@@ -60,7 +94,7 @@ const DashboardContent = () => (
             <div className="card flex-col justify-between items-center inline-block bg-[#6E987C] px-6 py-3 text-white w-56 h-56 rounded-xl">
                 <div className="flex flex-row items-center justify-between mb-16 w-full">
                     <span>
-                        <IconBrandStorybook className='w-20 h-20 text-white'/>
+                        <LibraryBig className='w-20 h-20 text-white'/>
                     </span>
                     <span className="text-6xl">
                         73
@@ -72,10 +106,7 @@ const DashboardContent = () => (
             <div className="card flex-col justify-between items-center inline-block bg-[#22615D] px-6 py-3 text-white w-56 h-56 rounded-xl">
                 <div className="flex flex-row items-center justify-between mb-16 w-full">
                     <span>
-                    <svg className="w-20 h-20 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
-                    </svg>
-
+                    <BookUp2 className='w-20 h-20 text-white'/>
                     </span>
                     <span className="text-6xl">
                         24
@@ -87,10 +118,7 @@ const DashboardContent = () => (
             <div className="card flex-col justify-between items-center inline-block bg-[#FBC78F] px-6 py-3 text-white w-56 h-56 rounded-xl">
                 <div className="flex flex-row items-center justify-between mb-16 w-full">
                     <span>
-                    <svg className="w-20 h-20 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" clip-rule="evenodd"/>
-                    </svg>
-
+                    <BookCheck className='w-20 h-20 text-white'/>
                     </span>
                     <span className="text-6xl">
                         58
@@ -102,9 +130,7 @@ const DashboardContent = () => (
             <div className="card flex-col justify-between items-center inline-block bg-[#AC455E] px-6 py-3 text-white w-56 h-56 rounded-xl">
                 <div className="flex flex-row items-center justify-between mb-16 w-full">
                     <span>
-                    <svg className="w-20 h-20 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.597 3.2A1 1 0 0 0 7.04 4.289a3.49 3.49 0 0 1 .057 1.795 3.448 3.448 0 0 1-.84 1.575.999.999 0 0 0-.077.094c-.596.817-3.96 5.6-.941 10.762l.03.049a7.73 7.73 0 0 0 2.917 2.602 7.617 7.617 0 0 0 3.772.829 8.06 8.06 0 0 0 3.986-.975 8.185 8.185 0 0 0 3.04-2.864c1.301-2.2 1.184-4.556.588-6.441-.583-1.848-1.68-3.414-2.607-4.102a1 1 0 0 0-1.594.757c-.067 1.431-.363 2.551-.794 3.431-.222-2.407-1.127-4.196-2.224-5.524-1.147-1.39-2.564-2.3-3.323-2.788a8.487 8.487 0 0 1-.432-.287Z"/>
-                    </svg>
+                    <BookDashed className='w-20 h-20 text-white'/>
                     </span>
                     <span className="text-6xl">
                         16

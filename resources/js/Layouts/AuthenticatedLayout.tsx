@@ -5,7 +5,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Sidebar, SidebarBody, SidebarLink } from '@/Components/ui/sidebar';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { IconBrandTabler, IconUserBolt, IconSettings, IconArrowLeft, IconBrandStorybook } from '@tabler/icons-react';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 
 export default function Authenticated({
     header,
@@ -37,6 +37,15 @@ export default function Authenticated({
               ),
             },
             {
+              label: "Tambah Buku",
+              href: "books",
+              icon: (
+                <>
+                <IconBrandStorybook className="dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+                </>
+              ),
+            },
+            {
               label: "Pengaturan",
               href: "#",
               icon: (
@@ -45,13 +54,35 @@ export default function Authenticated({
             },
             {
               label: "Logout",
-              href: "#",
+              href: "lgouto",
               icon: (
                 <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
               ),
             },
           ];
           const [open, setOpen] = useState(false);
+          const [currentTime, setCurrentTime] = useState(new Date());
+
+          useEffect(() => {
+            const interval = setInterval(() => {
+                setCurrentTime(new Date());
+            }, 1000);
+            return () => clearInterval(interval);
+          },[]);
+
+          const formattedDate = currentTime.toLocaleDateString("id-ID",{
+            weekday: "long",
+            day: 'numeric',
+            month: "long",
+            year: 'numeric',
+        });
+          const formattedTime = currentTime.toLocaleDateString("id-ID",{
+            weekday: "long",
+            day: 'numeric',
+            month: "long",
+            year: 'numeric',
+        });
+
     return (
         <div className="md:flex min-h-screen bg-gray-100 dark:bg-neutral-900 text-black dark:text-white">
         	{/* Sidebar */}
@@ -66,21 +97,21 @@ export default function Authenticated({
                     	</div>
                 	</div>
                 	<div>
-                    	<SidebarLink
-                        	link={{
-                            	label: user.name,
-                            	href: "#",
-                            	icon: (
-                                	<img
-                                    	src="https://assets.aceternity.com/manu.png"
-                                    	className="h-7 w-7 flex-shrink-0 rounded-full"
-                                    	width={50}
-                                    	height={50}
-                                    	alt="Avatar"
-                                	/>
-                            	),
+                <SidebarLink
+                    link={{
+                        label: user.name,
+                        href: "#",
+                        icon: (
+                            <img
+                                src="https://assets.aceternity.com/manu.png"
+                                className="h-7 w-7 flex-shrink-0 rounded-full"
+                                width={50}
+                                height={50}
+                                alt="Avatar"
+                            />
+                        ),
                         	}}
-                    	/>
+                />
                 	</div>
             	</SidebarBody>
         	</Sidebar>
@@ -96,7 +127,31 @@ export default function Authenticated({
                     	</div>
                 	</header>
             	)}
-
+                <nav className='bg-white p-4 lg:flex lg:flex-row items-center justify-between'>
+                    <div className="">
+                        <input type="text" name="query" id="searchQuery" className='rounded-lg border border-gray-300 focus:ring-opacity-50 focus:ring-2 ring-green-400'
+                        placeholder='Cari buku...'/>
+                    </div>
+                    <div className="flex gap-4 items-center">
+                        <h3 className="font-bold text-md text-black">
+                            {formattedDate}
+                        </h3>
+                        <Dropdown>
+                            <Dropdown.Trigger>
+                                <button type="button" className='flex items-center focus:outline-2 rounded-full outline-blue-500'>
+                            <img src="https://ui.aceternity.com/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1580489944761-15a19d654956%3Fixlib%3Drb-4.0.3%26ixid%3DM3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww%26auto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D60&w=128&q=75" alt="" className='w-10 h-10 rounded-full'/>
+                                </button>
+                            </Dropdown.Trigger>
+                            <Dropdown.Content>
+                                <Dropdown.Link href={route('profile.edit')}>
+                                    <span className="block text-sm text-gray-700 dark:text-gray-100">
+                                        {user.name}
+                                    </span>
+                                </Dropdown.Link>
+                            </Dropdown.Content>
+                        </Dropdown>
+                    </div>
+                </nav>
             	<main className="flex-1 p-4">
                 	{children}
             	</main>

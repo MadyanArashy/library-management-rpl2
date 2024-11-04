@@ -39,7 +39,7 @@ export default function Login({
             )}
 
             <div>
-                <h1 className='font-bold text-2xl dark:text-gray-100'>Selamat Datang Kembali di<br/> SMK Pesat IT XPro!</h1>
+                <h1 className='font-bold text-2xl text-gray-100'>Selamat Datang Kembali di<br/> SMK Pesat IT XPro!</h1>
             </div>
 
             <form onSubmit={submit}>
@@ -68,6 +68,7 @@ export default function Login({
                         className="mt-1 block w-full"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
+                        placeholder='Masukkan password Anda'
                     />
 
                     <InputError message={errors.password} className="mt-2" />
@@ -89,7 +90,7 @@ export default function Login({
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                            className="rounded-md text-sm text-gray-700 underline focus:outline-none focus:ring-2 focus:ring-offset-2 hover:opacity-60 focus:ring-offset-gray-800"
                         >
                             Lupa Password Anda?
                         </Link>
@@ -103,7 +104,7 @@ export default function Login({
                     </PrimaryButton>
                     <Link
                     href={route('register')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                            className="rounded-md text-sm text-gray-700 underline focus:outline-none focus:ring-2 focus:ring-offset-2 hover:opacity-60 focus:ring-offset-gray-800"
                     >
                         Belum Memiliki Akun?
                     </Link>

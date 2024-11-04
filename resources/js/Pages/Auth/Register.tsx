@@ -27,13 +27,11 @@ export default function Register() {
             <Head title="Register" />
 
             <div>
-                <h1 className='font-bold text-2xl dark:text-gray-100'>Selamat Datang di Perpustakaan SMK Pesat IT XPro!</h1>
+                <h1 className='font-bold text-2xl text-gray-100'>Selamat Datang di Perpustakaan SMK Pesat IT XPro!</h1>
             </div>
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
                     <TextInput
                         id="name"
                         name="name"
@@ -43,14 +41,13 @@ export default function Register() {
                         isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
                         required
+                        placeholder='Nama Anda'
                     />
 
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -60,14 +57,13 @@ export default function Register() {
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                         required
+                        placeholder='Email Anda'
                     />
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
                     <TextInput
                         id="password"
                         type="password"
@@ -77,16 +73,13 @@ export default function Register() {
                         autoComplete="new-password"
                         onChange={(e) => setData('password', e.target.value)}
                         required
+                        placeholder='Password Anda'
                     />
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
 
                     <TextInput
                         id="password_confirmation"
@@ -99,6 +92,7 @@ export default function Register() {
                             setData('password_confirmation', e.target.value)
                         }
                         required
+                        placeholder='Konfirmasi Password'
                     />
 
                     <InputError
@@ -110,9 +104,9 @@ export default function Register() {
                 <div className="mt-4 flex items-center justify-end">
                     <Link
                         href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                        className="rounded-md text-sm text-gray-700 underline focus:outline-none focus:ring-2 focus:ring-offset-2 hover:opacity-60 focus:ring-offset-gray-800"
                     >
-                        Already registered?
+                        Sudah memiliki akun?
                     </Link>
 
                     <PrimaryButton className="ms-4" disabled={processing}>
