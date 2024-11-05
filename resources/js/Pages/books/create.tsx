@@ -1,10 +1,11 @@
+import Authenticated from '@/Layouts/AuthenticatedLayout'
 import React from 'react'
 
 const create = () => {
   return (
-    <div>
-        create
-    </div>
+    <Authenticated>
+        <div className="">Create</div>
+    </Authenticated>
   )
 }
 
