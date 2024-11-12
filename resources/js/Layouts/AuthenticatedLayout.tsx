@@ -18,27 +18,27 @@ export default function Authenticated({
         const links = [
             {
               label: "Dashboard",
-              href: "dashboard",
+              href: route('dashboard'),
               icon: (
                 <>
                 <IconBrandTabler className="hidden dark:block dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-                <img src="images/dashboard.png" className='dark:hidden w-6'/>
+                <img src='/images/dashboard.png' className='dark:hidden w-6' alt="Dashboard Icon"/>
                 </>
               ),
             },
             {
               label: "Lemari Buku",
-              href: "#",
+              href: route('books.index'),
               icon: (
                 <>
                 <IconUserBolt className="hidden dark:block dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-                <img src="images/lemari.png" className='dark:hidden w-6'/>
+                <img src="/images/lemari.png" className='dark:hidden w-6'/>
                 </>
               ),
             },
             {
               label: "Tambah Buku",
-              href: "books",
+              href: route('books.create'),
               icon: (
                 <>
                 <IconBrandStorybook className="dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
@@ -47,16 +47,9 @@ export default function Authenticated({
             },
             {
               label: "Pengaturan",
-              href: "#",
+              href: route('dashboard'),
               icon: (
                 <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-              ),
-            },
-            {
-              label: "Logout",
-              href: "lgouto",
-              icon: (
-                <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
               ),
             },
           ];
@@ -164,7 +157,7 @@ export default function Authenticated({
 function Logo() {
 	return (
     	<Link href="#" className="font-normal flex space-x-2 items-center text-sm text-black dark:text-white py-1 relative z-20">
-        	<img className="w-10 me-1" src="images/book.png"/>
+        	<img className="w-10 me-1" src="/images/book.png"/>
         	<span className="font-medium mt-2">Perpustakaan SMK PESAT</span>
     	</Link>
 	);

@@ -11,6 +11,11 @@ use App\Models\Book;
 class BookController extends Controller
 {
     public function index(): Response{
+        $books = Book::all();
+        return Inertia::render('books/index', ['books' => $books]);
+    }
+    public function show(): Response{
+
         return Inertia::render('books/index');
     }
     public function create(): Response {
@@ -26,9 +31,13 @@ class BookController extends Controller
 
         Book::create($request->all());
 
-        return redirect()->route('books/index')->with('success','Anda telah menambahkan buku');
+        return redirect('books')->with('success','Anda telah menambahkan buku');
     }
     public function update(): RedirectResponse {
-        return redirect()->route('books/index')->with('success', 'Anda telah mengubah buku');
+        return redirect()->route('books.index')->with('success', 'Anda telah mengubah buku');
+    }
+    public function destroy(Book $book): RedirectResponse {
+        $book->deleteOrFail();
+        return redirect()->route('books.index')->with('success', 'Anda telah menghapus buku');
     }
 }
